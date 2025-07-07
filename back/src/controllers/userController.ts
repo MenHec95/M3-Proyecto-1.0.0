@@ -10,7 +10,7 @@ export const getUserController = (req: Request, res: Response): void => {
 
 export const getUserByIdController = (req: Request<{ id: string }>, res: Response): void => {
   res.status(200).json({
-    message: "Obtener el detalle de un turno específico.",
+    message: "Obtener el detalle de un usuario específico.",
     data: {},
   });
 };
