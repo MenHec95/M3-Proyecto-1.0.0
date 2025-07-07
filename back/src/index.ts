@@ -1,9 +1,6 @@
-const a: number = 5;
-const b: number = 3;
-const c = "4";
+import server from "./server";
+import { PORT } from "./config/envs";
 
-const suma = (a: number, b: number): number => {};
-
-console.log(suma(a, b));
-
-const string = "hola";
+server.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
