@@ -4,7 +4,7 @@ export interface ScheduleAppointmentDTO {
   status: Status;
 }
 
-enum Status {
-  actve = "Active",
-  cancel = "cancelled",
+export enum Status {
+  Active = "active",
+  Cancelled = "cancelled",
 }
