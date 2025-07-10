@@ -1,28 +1,51 @@
 import { Request, Response } from "express";
 import { IUserLoginDTO, IUserRegisterDTO } from "../dtos/UserDTO";
+import { getUserByIdService, getUserService, UserServiceRegister } from "../services/UserService";
 
-export const getUserController = (req: Request, res: Response): void => {
-  res.status(200).json({
-    message: "Obtener el listado de todos los usuarios.",
-    data: [],
-  });
+export const getUserController = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const users = await getUserService();
+    res.status(200).json({
+      message: "Obtener el listado de todos los usuarios.",
+      data: users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error instanceof Error ? error.message : "Error Desconcido",
+    });
+  }
 };
 
-export const getUserByIdController = (req: Request<{ id: string }>, res: Response): void => {
-  res.status(200).json({
-    message: "Obtener el detalle de un usuario específico.",
-    data: {},
-  });
+export const getUserByIdController = async (req: Request<{ id: string }>, res: Response): Promise<void> => {
+  try {
+    const user = await getUserByIdService(parseInt(req.params.id, 10));
+    res.status(200).json({
+      message: "Obtener el detalle de un usuario específico.",
+      data: user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error instanceof Error ? error.message : "Error Desconcido",
+    });
+  }
 };
 
-export const registerUserController = (req: Request<unknown, unknown, IUserRegisterDTO>, res: Response): void => {
-  res.status(201).json({
-    message: "Registro de un nuevo usuario.",
-    data: {},
-  });
+export const registerUserController = async (req: Request<unknown, unknown, IUserRegisterDTO>, res: Response): Promise<void> => {
+  try {
+    const registerUser = await UserServiceRegister(req.body);
+
+    res.status(201).json({
+      message: "Registro de un nuevo usuario.",
+      data: registerUser,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error instanceof Error ? error.message : "Error Desconcido",
+    });
+  }
 };
 
-export const loginUserController = (req: Request<unknown, unknown, IUserLoginDTO>, res: Response): void => {
+export const loginUserController = async (req: Request<unknown, unknown, IUserLoginDTO>, res: Response): Promise<void> => {
   res.status(201).json({
     message: "Login del usuario a la aplicación.",
     data: {},
