@@ -1,11 +1,11 @@
+import { UserModel } from "../config/data-source";
 import { IUserRegisterDTO, UserResponseDTO } from "../dtos/UserDTO";
+import { User } from "../entities/User.Entity";
 import { IUser } from "../interfaces/UserInterface";
 import { getCredentialsService } from "./CredentialService";
 
 const UsersList: IUser[] = [];
-let id: number = 1;
 
-// Implementar una función que pueda retornar el arreglo completo de usuarios.
 export const getUserService = async (): Promise<UserResponseDTO[]> => {
   return UsersList.map((user) => {
     return {
@@ -20,21 +20,17 @@ export const getUserByIdService = async (Id: number): Promise<UserResponseDTO> =
   if (userFound) return { email: userFound.email, name: userFound.name };
   else throw new Error("Usuario no encontrado");
 };
-// Implementar una función que pueda crear un nuevo usuario dentro del arreglo PERO ten en cuenta que al momento de crear el usuario, debe crear su correspondiente par de credenciales llamando a la función correspondiente del servicio de credenciales. Al recibir de esta función el id de las credenciales, debe guardar el dato en la propiedad credentialsId.
 
 export const UserServiceRegister = async (user: IUserRegisterDTO): Promise<UserResponseDTO> => {
   const idUserCredential = await getCredentialsService(user.username, user.password);
-  const newUser: IUser = {
-    id: id++,
+
+  const newUser: User = UserModel.create({
     name: user.name,
     email: user.email,
-    nDni: user.dni,
-    birthdate: user.birthday,
-    credentialsId: idUserCredential,
-  };
-  UsersList.push(newUser);
-  return {
-    name: newUser.name,
-    email: newUser.email,
-  };
+    nDni: user.nDni,
+    birthdate: user.birthdate,
+    credential: idUserCredential,
+  });
+
+  return await UserModel.save(newUser);
 };

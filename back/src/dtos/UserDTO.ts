@@ -1,8 +1,8 @@
 export interface IUserRegisterDTO {
   name: string;
   email: string;
-  dni: number;
-  birthday: Date;
+  nDni: number;
+  birthdate: Date;
   username: string;
   password: string;
 }

@@ -1,8 +1,10 @@
+import { CredentialModel } from "../config/data-source";
+import { Credential } from "../entities/Credentials.entities";
 import { ICredentials } from "../interfaces/CredencialsInterface";
 import { webcrypto } from "crypto";
 
 // Implementar una función que reciba username y password y cree un nuevo par de credenciales con estos datos. Debe retornar el ID del par de credenciales creado.
-let id = 1;
+
 const credencialsList: ICredentials[] = [];
 
 const crypPass = async (text: string): Promise<string> => {
@@ -14,20 +16,23 @@ const crypPass = async (text: string): Promise<string> => {
   return hashex;
 };
 
-const UserExistCheck = (username: string): void => {
-  const credencialFound = credencialsList.find((creden) => creden.username === username);
+const UserExistCheck = async (username: string): Promise<void> => {
+  const credencialFound = await CredentialModel.findOne({
+    where: {
+      username: username,
+    },
+  });
   if (credencialFound) throw new Error(`El usuario: ${username} ya existe, intente con otro`);
 };
 
-export const getCredentialsService = async (username: string, password: string): Promise<number> => {
+export const getCredentialsService = async (username: string, password: string): Promise<Credential> => {
   UserExistCheck(username);
-  const credencial: ICredentials = {
-    id: id++,
+
+  const credencial: Credential = CredentialModel.create({
     username: username,
     password: await crypPass(password),
-  };
-  credencialsList.push(credencial);
-  return credencial.id;
+  });
+  return await CredentialModel.save(credencial);
 };
 
 // Implementar una función que recibirá username y password, y deberá chequear si el nombre de usuario existe entre los datos disponibles y, si es así, si el password es correcto. En caso de que la validación sea exitosa, deberá retornar el ID de las credenciales.
