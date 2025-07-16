@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { IUserLoginDTO, IUserRegisterDTO } from "../dtos/UserDTO";
 import { getUserByIdService, getUserService, UserServiceRegister } from "../services/UserService";
+import { PostgresError } from "../interfaces/ErrorInterfaces";
 
 export const getUserController = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -39,8 +40,9 @@ export const registerUserController = async (req: Request<unknown, unknown, IUse
       data: registerUser,
     });
   } catch (error) {
+    const err = error as PostgresError;
     res.status(500).json({
-      message: error instanceof Error ? error.message : "Error Desconcido",
+      message: err instanceof Error ? (err.detail ? err.detail : err.message) : "Error Desconcido",
     });
   }
 };

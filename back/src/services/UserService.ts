@@ -1,4 +1,4 @@
-import { UserModel } from "../config/data-source";
+import { AppDataSourceConection } from "../config/data-source";
 import { IUserRegisterDTO, UserResponseDTO } from "../dtos/UserDTO";
 import { User } from "../entities/User.Entity";
 import { IUser } from "../interfaces/UserInterface";
@@ -22,15 +22,17 @@ export const getUserByIdService = async (Id: number): Promise<UserResponseDTO> =
 };
 
 export const UserServiceRegister = async (user: IUserRegisterDTO): Promise<UserResponseDTO> => {
-  const idUserCredential = await getCredentialsService(user.username, user.password);
-
-  const newUser: User = UserModel.create({
-    name: user.name,
-    email: user.email,
-    nDni: user.nDni,
-    birthdate: user.birthdate,
-    credential: idUserCredential,
+  const resultadoTransaccion = await AppDataSourceConection.transaction(async (entityManager) => {
+    const idUserCredential = await getCredentialsService(entityManager, user.username, user.password);
+    const newUser: User = entityManager.create(User, {
+      name: user.name,
+      email: user.email,
+      nDni: user.nDni,
+      birthdate: user.birthdate,
+      credential: idUserCredential,
+    });
+    await entityManager.save(newUser);
+    return newUser;
   });
-
-  return await UserModel.save(newUser);
+  return resultadoTransaccion;
 };
