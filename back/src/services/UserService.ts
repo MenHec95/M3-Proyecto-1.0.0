@@ -1,23 +1,23 @@
-import { AppDataSourceConection } from "../config/data-source";
+import { AppDataSourceConection, UserModel } from "../config/data-source";
 import { IUserRegisterDTO, UserResponseDTO } from "../dtos/UserDTO";
 import { User } from "../entities/User.Entity";
-import { IUser } from "../interfaces/UserInterface";
+//import { IUser } from "../interfaces/UserInterface";
 import { getCredentialsService } from "./CredentialService";
 
-const UsersList: IUser[] = [];
+//const UsersList: IUser[] = [];
 
 export const getUserService = async (): Promise<UserResponseDTO[]> => {
-  return UsersList.map((user) => {
-    return {
-      name: user.name,
-      email: user.email,
-    };
-  });
+  return await UserModel.find();
 };
 
-export const getUserByIdService = async (Id: number): Promise<UserResponseDTO> => {
-  const userFound = UsersList.find((user) => user.id === Id);
-  if (userFound) return { email: userFound.email, name: userFound.name };
+export const getUserByIdService = async (Id: number): Promise<User | null> => {
+  const userFound = await UserModel.findOne({
+    where: {
+      id: Id,
+    },
+    relations: ["credential"],
+  }); //UsersList.find((user) => user.id === Id);
+  if (userFound) return userFound;
   else throw new Error("Usuario no encontrado");
 };
 
@@ -34,5 +34,8 @@ export const UserServiceRegister = async (user: IUserRegisterDTO): Promise<UserR
     await entityManager.save(newUser);
     return newUser;
   });
-  return resultadoTransaccion;
+  return {
+    name: resultadoTransaccion.name,
+    email: resultadoTransaccion.email,
+  };
 };

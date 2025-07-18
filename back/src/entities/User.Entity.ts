@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Credential } from "./Credentials.entities";
 
 @Entity("users")
@@ -15,6 +15,7 @@ export class User {
   nDni: number;
 
   @OneToOne(() => Credential, { cascade: true })
+  @JoinColumn()
   credential: Credential;
 
   @CreateDateColumn()
