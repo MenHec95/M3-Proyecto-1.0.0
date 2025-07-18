@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { IUserLoginDTO, IUserRegisterDTO } from "../dtos/UserDTO";
-import { getUserByIdService, getUserService, UserServiceRegister } from "../services/UserService";
+import { IUserLoginDTO, IUserRegisterDTO, UserLoginSucDTO } from "../dtos/UserDTO";
+import { getUserByIdService, getUserService, loginUserService, UserServiceRegister } from "../services/UserService";
 import { PostgresError } from "../interfaces/ErrorInterfaces";
 
 export const getUserController = async (req: Request, res: Response): Promise<void> => {
@@ -21,11 +21,10 @@ export const getUserByIdController = async (req: Request<{ id: string }>, res: R
   try {
     const user = await getUserByIdService(parseInt(req.params.id, 10));
     res.status(200).json({
-      message: "Obtener el detalle de un usuario específico.",
-      data: user,
+      user,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       message: error instanceof Error ? error.message : "Error Desconcido",
     });
   }
@@ -41,15 +40,23 @@ export const registerUserController = async (req: Request<unknown, unknown, IUse
     });
   } catch (error) {
     const err = error as PostgresError;
-    res.status(500).json({
+    res.status(400).json({
       message: err instanceof Error ? (err.detail ? err.detail : err.message) : "Error Desconcido",
     });
   }
 };
 
 export const loginUserController = async (req: Request<unknown, unknown, IUserLoginDTO>, res: Response): Promise<void> => {
-  res.status(201).json({
-    message: "Login del usuario a la aplicación.",
-    data: {},
-  });
+  try {
+    const user: UserLoginSucDTO = await loginUserService(req.body.username, req.body.password);
+
+    res.status(200).json({
+      login: true,
+      user,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error instanceof Error ? error.message : "Error Desconcido",
+    });
+  }
 };

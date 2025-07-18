@@ -1,8 +1,8 @@
 import { AppDataSourceConection, UserModel } from "../config/data-source";
-import { IUserRegisterDTO, UserResponseDTO } from "../dtos/UserDTO";
+import { IUserRegisterDTO, UserLoginSucDTO, UserResponseDTO } from "../dtos/UserDTO";
 import { User } from "../entities/User.Entity";
 //import { IUser } from "../interfaces/UserInterface";
-import { getCredentialsService } from "./CredentialService";
+import { getCredentialsService, userCredencialServiceCheck } from "./CredentialService";
 
 //const UsersList: IUser[] = [];
 
@@ -37,5 +37,25 @@ export const UserServiceRegister = async (user: IUserRegisterDTO): Promise<UserR
   return {
     name: resultadoTransaccion.name,
     email: resultadoTransaccion.email,
+  };
+};
+
+export const loginUserService = async (username: string, password: string): Promise<UserLoginSucDTO> => {
+  const userId: number = await userCredencialServiceCheck(username, password);
+
+  const userFound: User | null = await UserModel.findOne({
+    where: {
+      credential: {
+        id: userId,
+      },
+    },
+  });
+
+  return {
+    id: userFound?.id ?? 0,
+    name: userFound?.name ?? "",
+    email: userFound?.email ?? "",
+    birthdate: userFound?.birthdate ?? new Date(),
+    nDni: userFound?.nDni ?? 0,
   };
 };

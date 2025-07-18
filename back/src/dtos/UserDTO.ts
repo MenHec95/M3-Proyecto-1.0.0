@@ -16,3 +16,11 @@ export interface UserResponseDTO {
   name: string;
   email: string;
 }
+
+export interface UserLoginSucDTO {
+  id: number;
+  name: string;
+  email: string;
+  birthdate: Date;
+  nDni: number;
+}
