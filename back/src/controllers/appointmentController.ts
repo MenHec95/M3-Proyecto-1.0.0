@@ -11,7 +11,7 @@ export const getAppointmentController = async (req: Request, res: Response): Pro
       data: appointment,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       message: error instanceof Error ? error.message : "Error Desconcido",
     });
   }
@@ -25,7 +25,7 @@ export const getAppointmentByIdController = async (req: Request<{ id: string }>,
       data: appbyId,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       message: error instanceof Error ? error.message : "Error Desconcido",
     });
   }
@@ -33,12 +33,12 @@ export const getAppointmentByIdController = async (req: Request<{ id: string }>,
 export const scheduleAppointmentController = async (req: Request<unknown, unknown, ScheduleAppointmentDTO>, res: Response): Promise<void> => {
   try {
     const newAppointment = await createAppointmentService(req.body);
-    res.status(200).json({
+    res.status(201).json({
       message: "Agendar un nuevo turno.",
       data: newAppointment,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(400).json({
       message: error instanceof Error ? error.message : "Error Desconcido",
     });
   }
@@ -52,7 +52,7 @@ export const cancelAppointmentController = async (req: Request<{ id: string }>, 
       data: cancelApp,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       message: error instanceof Error ? error.message : "Error Desconcido",
     });
   }

@@ -15,7 +15,7 @@ export const getUserByIdService = async (Id: number): Promise<User | null> => {
     where: {
       id: Id,
     },
-    relations: ["credential"],
+    relations: ["appointments"],
   }); //UsersList.find((user) => user.id === Id);
   if (userFound) return userFound;
   else throw new Error("Usuario no encontrado");

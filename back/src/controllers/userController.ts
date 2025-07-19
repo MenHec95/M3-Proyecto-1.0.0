@@ -20,9 +20,7 @@ export const getUserController = async (req: Request, res: Response): Promise<vo
 export const getUserByIdController = async (req: Request<{ id: string }>, res: Response): Promise<void> => {
   try {
     const user = await getUserByIdService(parseInt(req.params.id, 10));
-    res.status(200).json({
-      user,
-    });
+    res.status(200).json(user);
   } catch (error) {
     res.status(404).json({
       message: error instanceof Error ? error.message : "Error Desconcido",
