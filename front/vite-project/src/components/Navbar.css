@@ -1,0 +1,60 @@
+:root {
+  --color-bg: #e8e4f0;
+  --color-primary: #bfa2db;
+  --color-secondary: #4b4453;
+  --color-accent: #7f5a83;
+}
+
+body {
+  margin: 0;
+  font-family: "Quicksand", sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-secondary);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--color-primary);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.logoImg {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* 💫 Sombra suave */
+}
+.logoTit {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--color-secondary);
+  letter-spacing: 1px;
+}
+
+.navbarLinks {
+  list-style: none;
+  display: flex;
+  align-items: center; /* 🔧 Esto alinea verticalmente los <li> */
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbarLinks li {
+  display: flex; /* ⚠️ importante para alinear contenido del <li> */
+  align-items: center;
+  justify-content: center;
+}
+
+.navbarLinks li:hover {
+  color: var(--color-accent);
+}
