@@ -6,7 +6,7 @@ const Navbar = () => {
     <>
       <nav>
         <div>
-          <img src="../../public/img/logo.png" class="logoImg" />
+          <img src="/img/logo.png" />
           <span>LUNAS ESPACIO HOLISTICO & SPA</span>
         </div>
 
