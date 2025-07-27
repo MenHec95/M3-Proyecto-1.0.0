@@ -1,16 +1,16 @@
-import Usuario from "../assets/Usuario";
+import Usuario from "../usuario/Usuario";
 import "./Navbar.css";
 
 const Navbar = () => {
   return (
     <>
-      <nav class="navbar">
-        <div class="logo">
+      <nav>
+        <div>
           <img src="../../public/img/logo.png" class="logoImg" />
-          <span class="logoTit">LUNAS ESPACIO HOLISTICO & SPA</span>
+          <span>LUNAS ESPACIO HOLISTICO & SPA</span>
         </div>
 
-        <ul className="navbarLinks">
+        <ul>
           <li>Inicio</li>
           <li>Mis turnos</li>
           <li>
