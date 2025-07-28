@@ -1,0 +1,35 @@
+/* Estilos para el contenedor principal */
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  background: rgba(232, 213, 224, 0.3); /* Fondo lila muy translúcido */
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.usuario:hover {
+  background: rgba(232, 213, 224, 0.5); /* Más opaco al hover */
+  transform: translateY(-1px);
+}
+
+/* Avatar */
+.usuarioAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #9a86a4; /* Lila medio */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Nombre de usuario */
+.usuarioName {
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  color: #4a3e56; /* Violeta oscuro (para texto) */
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}

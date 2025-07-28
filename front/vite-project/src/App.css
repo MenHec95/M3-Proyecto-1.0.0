@@ -1,0 +1,71 @@
+/* === Variables CSS en :root === */
+:root {
+  /* Violetas espirituales/suaves */
+  --color-primary: #9a86a4; /* Lila apagado */
+  --color-primary-light: #c0b3c8;
+  --color-primary-dark: #6d5d77;
+  --color-secondary: #d4c4e0; /* Lila claro */
+  --color-accent: #b388eb; /* Violeta vibrante (para detalles) */
+
+  /* Neutrales (contrastes elegantes) */
+  --color-text: #4a3e56; /* Violeta oscuro (para texto) */
+  --color-text-light: #7a6c8a;
+  --color-bg: #f9f5ff; /* Fondo blanco lila */
+  --color-bg-card: #ffffff; /* Cards blancas con sombra */
+
+  /* Estados */
+  --color-success: #88b388; /* Verde apagado */
+  --color-error: #e0afa0; /* Coral suave */
+  --color-warning: #e0c47a; /* Dorado claro */
+}
+/* === Estilos del body === */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Nunito", sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* === Tipografía === */
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Playfair Display", serif;
+  color: var(--color-primary-dark);
+  font-weight: 500;
+  letter-spacing: 0.5px; /* Legibilidad en títulos */
+}
+
+h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 1rem 0;
+}
+
+/* === Efectos sutiles === */
+a {
+  color: var(--color-primary-dark);
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--color-accent);
+}
+
+/* === Scrollbar temática === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 4px;
+}
