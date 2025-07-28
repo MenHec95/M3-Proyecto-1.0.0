@@ -1,0 +1,27 @@
+.mis-turnos-view {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.mis-turnos-header h1 {
+  font-family: "Playfair Display", serif;
+  color: var(--color-primary-dark);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.2rem;
+}
+
+.turnos-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.no-turnos-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--color-text-light);
+  font-family: "Nunito", sans-serif;
+  margin-top: 3rem;
+}

@@ -1,0 +1,83 @@
+.turno-card {
+  background: var(--color-bg-card);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(154, 134, 164, 0.1);
+  border-left: 4px solid var(--color-primary);
+  transition: transform 0.3s ease;
+}
+
+.turno-card:hover {
+  transform: translateY(-3px);
+}
+
+.turno-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-secondary);
+  padding-bottom: 0.5rem;
+}
+
+.turno-header h3 {
+  color: var(--color-primary-dark);
+  font-size: 1.2rem;
+}
+
+.turno-status {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.turno-status.confirmado {
+  background: var(--color-success);
+  color: white;
+}
+
+.turno-status.pendiente {
+  background: var(--color-warning);
+  color: var(--color-text);
+}
+
+.turno-status.cancelado {
+  background: var(--color-error);
+  color: white;
+}
+
+.turno-body p {
+  margin: 0.5rem 0;
+  color: var(--color-text-light);
+  font-family: "Nunito", sans-serif;
+}
+
+.cancel-turno-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: var(--color-text-light);
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+}
+
+.cancel-turno-btn:hover {
+  color: var(--color-error);
+  background: rgba(224, 175, 160, 0.1);
+  transform: rotate(90deg);
+}
+.turno-card {
+  position: relative; /* <-- Añade esta línea */
+  /* ... (mantén el resto de tus estilos existentes) ... */
+}
