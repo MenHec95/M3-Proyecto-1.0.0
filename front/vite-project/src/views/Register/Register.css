@@ -1,8 +1,30 @@
+.register-section {
+  background-image: url("/img/reglog.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 4rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.register-overlay {
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(0.1px);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  width: 100%;
+}
+
+/* //////////////////////////////////////////////////////////////////// */
 .register-form {
   max-width: 500px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: var(--color-bg-card);
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(0.01px);
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(154, 134, 164, 0.2);
   display: flex;
@@ -18,7 +40,7 @@
 
 .register-form input {
   padding: 0.6rem 0.8rem;
-  border: 1px solid var(--color-primary-light);
+  border: 1px solid var (--color-primary-light);
   border-radius: 8px;
   background-color: #fff;
   font-size: 1rem;
