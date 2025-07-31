@@ -9,10 +9,10 @@ export const registerValidates = (input) => {
 
   if (!input.birthdate) errors.birthdate = "Se requiere Fecha de nacimiento";
   if (!/^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])(?<!-02-(29|30))(?!-02-31)(?<!-(04|06|09|11)-31)$/.test(input.birthdate))
-    errors.birthdate = "Formato de Fecha erroneo, debe ser AAAA-MM-DD";
+    errors.birthdate = "Formato de Fecha erroneo, debe ser DD-MM-AAAA";
   const fecha = new Date(input.birthdate);
   if (isNaN(fecha.getTime())) errors.birthdate = `Fecha ${fecha} no existe`;
-  if (validateMayorEdad(input.birthdate)) errors.birthdate = "Debes ser mayor de edad";
+  if (!validateMayorEdad(input.birthdate)) errors.birthdate = "Debes ser mayor de edad";
 
   if (!input.nDni) errors.nDni = "Se requiere Numero de DNI";
   if (!/^\d{7,10}$/.test(input.nDni)) errors.nDni = "El DNI debe tener entre 7 y 10 numeros";
