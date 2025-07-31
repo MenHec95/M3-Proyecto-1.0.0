@@ -70,7 +70,6 @@
   background-color: var(--color-accent);
 }
 .submit-btn:disabled {
-  background-color: #cccccc;
   cursor: not-allowed;
   transform: none;
 }

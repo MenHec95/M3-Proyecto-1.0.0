@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import Swal from "sweetalert2";
 import "./Register.css";
 import { registerValidates } from "../../helpers/validates";
+import axios from "axios";
 
 export default function Register() {
   const formik = useFormik({
@@ -14,73 +15,91 @@ export default function Register() {
       password: "",
     },
     validate: registerValidates,
-    onSubmit: async (values, { setSubmitting }) => {
-      try {
-        // Aquí iría tu llamada API real
-        console.log("Enviando datos:", values);
-
-        await Swal.fire({
-          title: "¡Registro exitoso!",
-          icon: "success",
-          text: "Tu cuenta ha sido creada correctamente",
-          confirmButtonColor: "#9A86A4",
+    onSubmit: (values) => {
+      axios
+        .post("http://localhost:3000/users/register", values)
+        .then((res) => {
+          if (res.status === 201) {
+            Swal.fire({
+              title: "¡Registro exitoso!",
+              icon: "success",
+              text: "Tu cuenta ha sido creada correctamente",
+              confirmButtonColor: "#9A86A4",
+            });
+          }
+          // console.log(res);
+        })
+        .catch((error) => {
+          // console.log(error);
+          if (error.response.data.message.includes("email")) {
+            Swal.fire({
+              title: "Error",
+              text: `Ocurrió un problema al registrar, ya existe un Usuario con este el email ${formik.values.email}`,
+              icon: "error",
+              confirmButtonColor: "#e74c3c",
+            });
+          } else if (error.response.data.message.includes("username")) {
+            Swal.fire({
+              title: "Error",
+              text: `Ocurrió un problema al registrar, ya existe el Usuario ${formik.values.username}`,
+              icon: "error",
+              confirmButtonColor: "#e74c3c",
+            });
+          } else if (error.response.data.message.includes("nDni")) {
+            Swal.fire({
+              title: "Error",
+              text: `Ocurrió un problema al registrar, ya existe un Usuario con este DNI ${formik.values.nDni}`,
+              icon: "error",
+              confirmButtonColor: "#e74c3c",
+            });
+          }
         });
-      } catch (error) {
-        await Swal.fire({
-          title: "Error",
-          text: "Ocurrió un problema al registrar",
-          icon: "error",
-          confirmButtonColor: "#e74c3c",
-        });
-      } finally {
-        setSubmitting(false);
-      }
+      // console.log("Enviando datos:", values);
     },
   });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const errors = await formik.validateForm();
-    if (Object.keys(errors).length > 0) {
-      await Swal.fire({
-        title: "Error en el formulario",
-        html: `<ul>${Object.values(errors)
-          .map((err) => `<li>${err}</li>`)
-          .join("")}</ul>`,
-        icon: "error",
-        confirmButtonColor: "#e74c3c",
-      });
-      return;
-    }
-
-    formik.handleSubmit(e);
-  };
 
   return (
     <div className="register-section">
       <div className="register-overlay">
-        <form className="register-form" onSubmit={handleSubmit}>
+        <form className="register-form" onSubmit={formik.handleSubmit}>
           <label>Nombre y Apellido</label>
           <input type="text" name="name" placeholder="Nombres y Apellidos" onChange={formik.handleChange} value={formik.values.name} />
+          {formik.errors.name ? formik.errors.name : ""}
 
           <label>Email</label>
           <input type="text" name="email" placeholder="usuario@proveedor.com" onChange={formik.handleChange} value={formik.values.email} />
+          {formik.errors.email ? formik.errors.email : ""}
 
           <label>Fecha de nacimiento</label>
-          <input type="date" name="birthdate" placeholder="12-10-1995" onChange={formik.handleChange} value={formik.values.birthdate} />
+          <input type="date" name="birthdate" placeholder="dd-mm-aaaa" onChange={formik.handleChange} value={formik.values.birthdate} />
+          {formik.errors.birthdate ? formik.errors.birthdate : ""}
 
           <label>Número de documento</label>
-          <input type="text" name="nDni" placeholder="1111111" onChange={formik.handleChange} value={formik.values.nDni} />
+          <input type="number" name="nDni" placeholder="1111111" onChange={formik.handleChange} value={formik.values.nDni} />
+          {formik.errors.nDni ? formik.errors.nDni : ""}
 
           <label>Usuario</label>
           <input type="text" name="username" onChange={formik.handleChange} value={formik.values.username} />
+          {formik.errors.username ? formik.errors.username : ""}
 
           <label>Contraseña</label>
           <input type="password" name="password" onChange={formik.handleChange} value={formik.values.password} />
+          {formik.errors.password ? formik.errors.password : ""}
 
-          <button type="submit" disabled={formik.isSubmitting}>
-            {formik.isSubmitting ? "Registrando..." : "Registrar"}
+          <button
+            type="submit"
+            disabled={
+              Object.keys(formik.errors).length > 0 ||
+              !formik.values.name ||
+              !formik.values.birthdate ||
+              !formik.values.email ||
+              !formik.values.nDni ||
+              !formik.values.password ||
+              !formik.values.username
+            }
+            className="submit-btn"
+          >
+            Registrar
           </button>
         </form>
       </div>
