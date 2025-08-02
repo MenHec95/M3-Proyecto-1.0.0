@@ -1,0 +1,137 @@
+.notfound-overlay {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(2px);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(154, 134, 164, 0.2);
+}
+
+.notfound-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.notfound-title {
+  font-size: 6rem;
+  color: var(--color-primary-dark);
+  margin: 0;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.notfound-subtitle {
+  font-size: 1.8rem;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.notfound-text {
+  color: var(--color-text);
+  font-size: 1.1rem;
+  max-width: 400px;
+  margin: 0 auto 2rem;
+}
+
+.notfound-button {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.notfound-button:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+/* Ilustración temática */
+.notfound-illustration {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 2rem auto;
+}
+
+.moon {
+  width: 120px;
+  height: 120px;
+  background-color: var(--color-primary-light);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px rgba(154, 134, 164, 0.4);
+}
+
+.star {
+  position: absolute;
+  background-color: var(--color-accent);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.star:nth-child(1) {
+  top: 30px;
+  left: 40px;
+  animation: twinkle 2s infinite;
+}
+
+.star:nth-child(2) {
+  top: 20px;
+  right: 50px;
+  animation: twinkle 2.5s infinite 0.5s;
+}
+
+.star:nth-child(3) {
+  bottom: 40px;
+  left: 60px;
+  animation: twinkle 1.8s infinite 0.8s;
+}
+
+.star:nth-child(4) {
+  bottom: 30px;
+  right: 30px;
+  animation: twinkle 2.2s infinite;
+}
+
+.star:nth-child(5) {
+  top: 50px;
+  right: 30px;
+  animation: twinkle 1.5s infinite 0.3s;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .notfound-title {
+    font-size: 4rem;
+  }
+
+  .notfound-subtitle {
+    font-size: 1.5rem;
+  }
+}

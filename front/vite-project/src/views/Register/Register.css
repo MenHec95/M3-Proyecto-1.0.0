@@ -3,9 +3,11 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  min-height: 100vh;
   padding: 4rem 1rem;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .register-overlay {

@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import "./Register.css";
 import { registerValidates } from "../../helpers/validates";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const formik = useFormik({
@@ -102,6 +103,9 @@ export default function Register() {
           >
             Registrar
           </button>
+          <label>
+            ¿Ya tienes cuenta? <Link to="/Login">Inicia Sesión</Link>
+          </label>
         </form>
       </div>
     </div>

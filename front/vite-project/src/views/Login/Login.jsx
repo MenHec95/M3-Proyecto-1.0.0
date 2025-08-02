@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import "./Login.css";
 import { loginValidates } from "../../helpers/validates";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const formik = useFormik({
@@ -76,6 +77,9 @@ export default function Login() {
           <button type="submit" disabled={!formik.values.password || !formik.values.username || Object.keys(formik.errors).length > 0} className="submit-btn">
             "Iniciar Sesión"
           </button>
+          <label>
+            ¿No tienes cuenta? <Link to="/Register">Registro</Link>
+          </label>
         </form>
       </div>
     </div>

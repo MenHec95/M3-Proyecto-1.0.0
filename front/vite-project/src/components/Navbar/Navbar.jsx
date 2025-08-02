@@ -31,12 +31,7 @@ const Navbar = () => {
           <li className="nav-item">
             <Link to="/AgendarTurnos">{Location.pathname === "/AgendarTurnos" ? "" : "Agendar Turnos"}</Link>
           </li>
-          <li className="nav-item">
-            <Link to="/Register">{Location.pathname === "/Register" ? "" : "Registrarse"}</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/Login">{Location.pathname === "/Login" ? "" : "Iniciar Sesion"}</Link>
-          </li>
+
           <li className="nav-item">
             <Usuario />
           </li>
