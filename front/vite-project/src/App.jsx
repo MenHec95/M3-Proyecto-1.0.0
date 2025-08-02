@@ -7,10 +7,17 @@ import Register from "./views/Register/Register";
 function App() {
   return (
     <>
+      {
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/MisTurnos" element={<MisTurnos />} />
+        </Routes>
+      }
+
       {/* <Home /> */}
       {/* <MisTurnos /> */}
-      <Register />
-      <Login />
+      {/* <Register />
+      <Login /> */}
     </>
   );
 }
