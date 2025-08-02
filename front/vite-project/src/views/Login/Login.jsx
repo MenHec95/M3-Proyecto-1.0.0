@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
-
+import "./Login.css";
 import { loginValidates } from "../../helpers/validates";
 import axios from "axios";
 
@@ -15,7 +15,7 @@ export default function Login() {
       axios
         .post("http://localhost:3000/users/login", values)
         .then((res) => {
-          if (res.status === 201) {
+          if (res.status === 200) {
             Swal.fire({
               title: "¡Login Exitoso!",
               icon: "success",
@@ -26,48 +26,55 @@ export default function Login() {
           // console.log(res);
         })
         .catch((error) => {
-          // console.log(error);
-          //   if (error.response.data.message.includes("email")) {
-          //     Swal.fire({
-          //       title: "Error",
-          //       text: `Ocurrió un problema al registrar, ya existe un Usuario con este el email ${formik.values.email}`,
-          //       icon: "error",
-          //       confirmButtonColor: "#e74c3c",
-          //     });
-          //   } else if (error.response.data.message.includes("username")) {
-          //     Swal.fire({
-          //       title: "Error",
-          //       text: `Ocurrió un problema al registrar, ya existe el Usuario ${formik.values.username}`,
-          //       icon: "error",
-          //       confirmButtonColor: "#e74c3c",
-          //     });
-          //   } else if (error.response.data.message.includes("nDni")) {
-          //     Swal.fire({
-          //       title: "Error",
-          //       text: `Ocurrió un problema al registrar, ya existe un Usuario con este DNI ${formik.values.nDni}`,
-          //       icon: "error",
-          //       confirmButtonColor: "#e74c3c",
-          //     });
-          //   }
+          //   console.log(error);
+
+          if (error.response.data.message.includes("incorrecto")) {
+            Swal.fire({
+              title: "Error",
+              text: error.response.data.message,
+              icon: "error",
+              confirmButtonColor: "#e74c3c",
+            });
+          }
         });
-      // console.log("Enviando datos:", values);
     },
   });
 
   return (
-    <div>
-      <div>
-        <form onSubmit={formik.handleSubmit}>
-          <label>Usuario</label>
-          <input type="text" name="username" onChange={formik.handleChange} value={formik.values.username} />
-          {formik.errors.username ? formik.errors.username : ""}
+    <div className="login-section">
+      <div className="login-overlay">
+        <form className="login-form" onSubmit={formik.handleSubmit}>
+          <h2 className="login-title">Iniciar Sesión</h2>
 
-          <label>Contraseña</label>
-          <input type="password" name="password" onChange={formik.handleChange} value={formik.values.password} />
-          {formik.errors.password ? formik.errors.password : ""}
+          <div className="form-group">
+            <label htmlFor="username">Usuario</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              onChange={formik.handleChange}
+              value={formik.values.username}
+              className={formik.errors.username && formik.touched.username ? "input-error" : ""}
+              placeholder="Ingresa tu usuario"
+            />
+            {formik.errors.username ? <div className="error-message">{formik.errors.username}</div> : ""}
+          </div>
 
-          <button type="submit" disabled={Object.keys(formik.errors).length > 0 || !formik.values.password || !formik.values.username} className="submit-btn">
-            Registrar
+          <div className="form-group">
+            <label htmlFor="password">Contraseña</label>
+            <input
+              type="password"
+              name="password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              className={formik.errors.password && formik.touched.password ? "input-error" : ""}
+              placeholder="Ingresa tu contraseña"
+            />
+            {formik.errors.password ? <div className="error-message">{formik.errors.password}</div> : ""}
+          </div>
+
+          <button type="submit" disabled={!formik.values.password || !formik.values.username || Object.keys(formik.errors).length > 0} className="submit-btn">
+            "Iniciar Sesión"
           </button>
         </form>
       </div>
