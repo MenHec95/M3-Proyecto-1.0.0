@@ -9,7 +9,7 @@ function App() {
     <>
       {/* <Home /> */}
       {/* <MisTurnos /> */}
-      {/* <Register /> */}
+      <Register />
       <Login />
     </>
   );

@@ -62,6 +62,7 @@ export default function Register() {
     <div className="register-section">
       <div className="register-overlay">
         <form className="register-form" onSubmit={formik.handleSubmit}>
+          <h2 className="register-title">Registro de Usuario</h2>
           <label>Nombre y Apellido</label>
           <input type="text" name="name" placeholder="Nombres y Apellidos" onChange={formik.handleChange} value={formik.values.name} />
           {formik.errors.name ? formik.errors.name : ""}

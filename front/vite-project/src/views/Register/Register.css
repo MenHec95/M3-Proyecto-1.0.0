@@ -32,6 +32,13 @@
   gap: 1.2rem;
 }
 
+.register-title {
+  color: var(--color-primary-dark);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
 .register-form label {
   font-weight: 600;
   color: var(--color-primary-dark);
