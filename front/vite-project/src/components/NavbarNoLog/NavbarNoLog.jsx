@@ -1,8 +1,8 @@
 import Usuario from "../usuario/Usuario";
-import "./Navbar.css";
+import "../Navbar/Navbar.css";
 import { useLocation, Link } from "react-router-dom";
 
-const Navbar = () => {
+export default function NavbarNoLog() {
   const Location = useLocation();
 
   return (
@@ -26,24 +26,13 @@ const Navbar = () => {
             <Link to="/">{Location.pathname === "/" ? "" : "Inicio"}</Link>
           </li>
           <li className="nav-item">
-            <Link to="/MisTurnos">{Location.pathname === "/MisTurnos" ? "" : "Mis Turnos"}</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/AgendarTurnos">{Location.pathname === "/AgendarTurnos" ? "" : "Agendar Turnos"}</Link>
-          </li>
-          <li className="nav-item">
             <Link to="/Register">{Location.pathname === "/Register" ? "" : "Registrarse"}</Link>
           </li>
           <li className="nav-item">
             <Link to="/Login">{Location.pathname === "/Login" ? "" : "Iniciar Sesion"}</Link>
           </li>
-          <li className="nav-item">
-            <Usuario />
-          </li>
         </ul>
       </nav>
     </header>
   );
-};
-
-export default Navbar;
+}
