@@ -9,8 +9,8 @@ function App() {
     <>
       {/* <Home /> */}
       {/* <MisTurnos /> */}
-      <Register />
-      {/* <Login /> */}
+      {/* <Register /> */}
+      <Login />
     </>
   );
 }

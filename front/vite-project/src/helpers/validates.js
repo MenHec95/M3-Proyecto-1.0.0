@@ -40,3 +40,20 @@ const validateMayorEdad = (fechaStr) => {
 
   return fechaNacimiento <= hace18Anios;
 };
+
+export const loginValidates = (input) => {
+  const errors = {};
+
+  if (!input.username) errors.username = "El Usuario es requerido";
+  if (!/^[a-zA-Z0-9._-]*$/.test(input.username)) errors.username = "El Usuario solo puede tener Letras, Puntos, Guiones Bajos y Medios";
+  if (!/^.{4,20}$/.test(input.username)) errors.username = "El Usuario debe tener entre 4 y 20 caracteres";
+
+  if (!input.password) errors.password = "La Contraseña es requerida";
+  if (!/^.{8,20}$/.test(input.password)) errors.password = "La contraseña debe tener entre 8 y 20 caracteres";
+  if (!/(?=.*[a-z])/.test(input.password)) errors.password = "La contraseña debe tener almenos 1 Minuscula";
+  if (!/(?=.*[A-Z])/.test(input.password)) errors.password = "La contraseña debe tener almenos 1 Mayuscula";
+  if (!/(?=.*\d)/.test(input.password)) errors.password = "La contraseña debe tener almenos 1 Numero";
+  if (!/(?=.*[@$!%*?&#¡¿+çÇ.,:;-])/.test(input.password)) errors.password = "La contraseña debe tener almenos 1 Caracter Especial @$!%*?&#¡¿+çÇ.,:;-";
+
+  return errors;
+};
