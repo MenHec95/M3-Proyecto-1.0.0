@@ -44,6 +44,11 @@ export default function Login() {
   return (
     <div className="login-section">
       <div className="login-overlay">
+        <h2 className="login-title">
+          LUNAS
+          <br />
+          ESPACIO HOLÍSTICO & SPA
+        </h2>
         <form className="login-form" onSubmit={formik.handleSubmit}>
           <h2 className="login-title">Iniciar Sesión</h2>
 

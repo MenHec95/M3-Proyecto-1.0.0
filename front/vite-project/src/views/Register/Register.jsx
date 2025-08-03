@@ -62,6 +62,11 @@ export default function Register() {
   return (
     <div className="register-section">
       <div className="register-overlay">
+        <h2 className="register-title">
+          LUNAS
+          <br />
+          ESPACIO HOLÍSTICO & SPA
+        </h2>
         <form className="register-form" onSubmit={formik.handleSubmit}>
           <h2 className="register-title">Registro de Usuario</h2>
           <label>Nombre y Apellido</label>
