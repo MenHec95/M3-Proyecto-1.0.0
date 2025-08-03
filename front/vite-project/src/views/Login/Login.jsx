@@ -3,9 +3,10 @@ import Swal from "sweetalert2";
 import "./Login.css";
 import { loginValidates } from "../../helpers/validates";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -16,6 +17,7 @@ export default function Login() {
       axios
         .post("http://localhost:3000/users/login", values)
         .then((res) => {
+          localStorage.setItem("userId", res.data.user.id);
           if (res.status === 200) {
             Swal.fire({
               title: "¡Login Exitoso!",
@@ -24,6 +26,7 @@ export default function Login() {
               confirmButtonColor: "#9A86A4",
             });
           }
+          navigate("/Register");
           // console.log(res);
         })
         .catch((error) => {

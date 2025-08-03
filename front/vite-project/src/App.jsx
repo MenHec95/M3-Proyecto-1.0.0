@@ -13,8 +13,8 @@ import { useEffect, useState } from "react";
 
 function App() {
   const navigate = useNavigate();
-  const [userId, setUserId] = useState(localStorage.getItem("userId"));
-  const [isLogged, setIsLogged] = useState(false);
+
+  const [isLogged, setIsLogged] = useState(localStorage.getItem("userId"));
   const [isNotFound, setIsNotFound] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function App() {
     if ((isLogged && location.pathname === "/Register") || (isLogged && location.pathname === "/Login")) {
       navigate("/");
     }
-  }, [location.pathname, userId, navigate]);
+  }, [location.pathname, navigate]);
   return (
     <>
       {!isLogged ? (
