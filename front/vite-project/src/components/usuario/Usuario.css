@@ -1,35 +1,59 @@
-/* Estilos para el contenedor principal */
 .usuario {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 1rem;
+  align-items: center; /* Centra verticalmente imagen respecto al texto+botón */
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
   border-radius: 50px;
-  background: rgba(232, 213, 224, 0.3); /* Fondo lila muy translúcido */
-  transition: all 0.3s ease;
-  cursor: pointer;
+  background: rgba(232, 213, 224, 0.3);
 }
 
-.usuario:hover {
-  background: rgba(232, 213, 224, 0.5); /* Más opaco al hover */
-  transform: translateY(-1px);
-}
-
-/* Avatar */
+/* Imagen */
 .usuarioAvatar {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #9a86a4; /* Lila medio */
+  border: 2px solid #9a86a4;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Nombre de usuario */
+/* Columna vertical para texto y botón */
+.usuarioInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Centra horizontalmente el texto y botón */
+  gap: 0.4rem;
+}
+
+/* Texto centrado verticalmente */
 .usuarioName {
   font-family: "Nunito", sans-serif;
   font-weight: 600;
-  color: #4a3e56; /* Violeta oscuro (para texto) */
-  font-size: 0.95rem;
-  letter-spacing: 0.5px;
+  color: #4a3e56;
+  font-size: 1rem;
+  line-height: 1; /* ✅ IMPORTANTE: evita que el texto tenga espacio vertical extra */
+  display: flex;
+  align-items: center; /* ✅ Centra el texto en su línea base */
+  justify-content: center;
+}
+
+/* Botón centrado verticalmente también */
+.logoutBtn {
+  background-color: #9a86a4;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.85rem;
+  line-height: 1; /* ✅ mismo line-height que el texto */
+  display: flex;
+  align-items: center; /* ✅ centra el texto dentro del botón */
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logoutBtn:hover {
+  background-color: #7f5a83;
 }

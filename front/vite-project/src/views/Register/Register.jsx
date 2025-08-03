@@ -3,9 +3,10 @@ import Swal from "sweetalert2";
 import "./Register.css";
 import { registerValidates } from "../../helpers/validates";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -27,6 +28,7 @@ export default function Register() {
               text: "Tu cuenta ha sido creada correctamente",
               confirmButtonColor: "#9A86A4",
             });
+            navigate("/Login");
           }
           // console.log(res);
         })

@@ -2,7 +2,7 @@ import Usuario from "../usuario/Usuario";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ setIsLogged }) => {
   // const Location = useLocation();
 
   return (
@@ -32,7 +32,7 @@ const Navbar = () => {
         </li>
 
         <li className="nav-item">
-          <Usuario />
+          <Usuario setIsLogged={setIsLogged} />
         </li>
       </ul>
     </nav>

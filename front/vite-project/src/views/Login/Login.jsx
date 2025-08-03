@@ -18,6 +18,7 @@ export default function Login() {
         .post("http://localhost:3000/users/login", values)
         .then((res) => {
           localStorage.setItem("userId", res.data.user.id);
+
           if (res.status === 200) {
             Swal.fire({
               title: "¡Login Exitoso!",
@@ -26,7 +27,7 @@ export default function Login() {
               confirmButtonColor: "#9A86A4",
             });
           }
-          navigate("/Register");
+          navigate("/");
           // console.log(res);
         })
         .catch((error) => {

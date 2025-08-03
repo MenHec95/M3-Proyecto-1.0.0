@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 function App() {
   const navigate = useNavigate();
 
-  const [isLogged, setIsLogged] = useState(localStorage.getItem("userId"));
+  const [isLogged, setIsLogged] = useState(!!localStorage.getItem("userId"));
   const [isNotFound, setIsNotFound] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,12 @@ function App() {
     if ((isLogged && location.pathname === "/Register") || (isLogged && location.pathname === "/Login")) {
       navigate("/");
     }
-  }, [location.pathname, navigate]);
+  }, [location.pathname, navigate, isLogged]);
+
+  useEffect(() => {
+    setIsLogged(!!localStorage.getItem("userId"));
+  }, [location.pathname]);
+
   return (
     <>
       {!isLogged ? (
@@ -42,7 +47,7 @@ function App() {
         <>
           {!isNotFound && (
             <header>
-              <Navbar />
+              <Navbar setIsLogged={setIsLogged} />
             </header>
           )}
 
