@@ -1,0 +1,184 @@
+/* Home.css */
+:root {
+  --color-primary: #9a86a4; /* Lila suave principal */
+  --color-primary-dark: #6d5d77; /* Lila oscuro */
+  --color-primary-light: #c0b3c8; /* Lila claro */
+  --color-accent: #b388eb; /* Lila vibrante */
+  --color-text: #4a3e56; /* Texto principal */
+  --color-text-light: #7a6c8a; /* Texto secundario */
+  --color-bg: #fff9f2; /* Fondo beige claro */
+  --color-card: #ffffff; /* Fondo cards */
+}
+
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  color: var(--color-text);
+  font-family: "Nunito", sans-serif;
+}
+
+/* Hero Section */
+.hero {
+  background-image: linear-gradient(rgba(154, 134, 164, 0.7), rgba(154, 134, 164, 0.3)), url("/img/spa-hero.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 60vh;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  border-radius: 0 0 20px 20px;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 20px rgba(154, 134, 164, 0.2);
+}
+
+.hero-content h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* About Section */
+.about {
+  text-align: center;
+  padding: 3rem 1rem;
+  margin: 2rem 0;
+  background-color: var(--color-bg);
+  border-radius: 20px;
+}
+
+.about h2 {
+  font-family: "Playfair Display", serif;
+  color: var(--color-primary-dark);
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.about p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Services Preview */
+.services-preview {
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.services-preview h2 {
+  font-family: "Playfair Display", serif;
+  color: var(--color-primary-dark);
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+}
+
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.service-card {
+  background: var(--color-card);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(154, 134, 164, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--color-primary-light);
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(154, 134, 164, 0.15);
+}
+
+.service-card h3 {
+  color: var(--color-primary-dark);
+  font-family: "Playfair Display", serif;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.service-card p {
+  color: var(--color-text-light);
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.cta {
+  text-align: center;
+  padding: 4rem 1rem;
+  margin: 3rem 0;
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+  border-radius: 20px;
+  color: white;
+}
+
+.cta h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.cta p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: white;
+  color: var(--color-primary-dark);
+  padding: 0.8rem 2.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button:hover {
+  background-color: var(--color-primary-dark);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+
+  .about h2,
+  .services-preview h2,
+  .cta h2 {
+    font-size: 1.8rem;
+  }
+
+  .services-list {
+    grid-template-columns: 1fr;
+  }
+}
