@@ -9,12 +9,14 @@ import AgendarTurnos from "./views/AgendarTurnos/AgendarTurnos";
 import MisTurnos from "./views/MisTurnos/MisTurnos";
 import Register from "./views/Register/Register";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../context/Context";
 
 function App() {
+  const { userId } = useContext(UserContext);
+
   const navigate = useNavigate();
 
-  const [isLogged, setIsLogged] = useState(!!localStorage.getItem("userId"));
   const [isNotFound, setIsNotFound] = useState(false);
 
   useEffect(() => {
@@ -22,21 +24,17 @@ function App() {
 
     if (!validateRoutes.includes(location.pathname)) setIsNotFound(true);
     else setIsNotFound(false);
-    if (!isLogged && location.pathname !== "/Register" && location.pathname !== "/Login") {
+    if (!userId && location.pathname !== "/Register" && location.pathname !== "/Login") {
       navigate("/Login");
     }
-    if ((isLogged && location.pathname === "/Register") || (isLogged && location.pathname === "/Login")) {
+    if ((userId && location.pathname === "/Register") || (userId && location.pathname === "/Login")) {
       navigate("/");
     }
-  }, [location.pathname, navigate, isLogged]);
-
-  useEffect(() => {
-    setIsLogged(!!localStorage.getItem("userId"));
-  }, [location.pathname]);
+  }, [location.pathname, navigate, userId]);
 
   return (
     <>
-      {!isLogged ? (
+      {!userId ? (
         <>
           <Routes>
             <Route path="/Register" element={<Register />} />
@@ -47,7 +45,7 @@ function App() {
         <>
           {!isNotFound && (
             <header>
-              <Navbar setIsLogged={setIsLogged} />
+              <Navbar />
             </header>
           )}
 

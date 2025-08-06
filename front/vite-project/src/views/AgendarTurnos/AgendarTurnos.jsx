@@ -60,7 +60,7 @@ export default function AgendarTurnos() {
           <input type="time" name="time" placeholder="Hora del turno" onChange={formik.handleChange} value={formik.values.time} />
           {formik.errors.time ? formik.errors.time : ""}
 
-          <button type="submit" className="submit-btn">
+          <button type="submit" disabled={Object.keys(formik.errors).length > 0 || !formik.values.name || !formik.values.birthdate} className="submit-btn">
             Agendar
           </button>
         </form>
