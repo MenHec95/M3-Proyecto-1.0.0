@@ -57,3 +57,41 @@ export const loginValidates = (input) => {
 
   return errors;
 };
+
+export const agendarValidates = (input) => {
+  const errors = {};
+
+  if (!input.date) {
+    errors.date = "Se requiere fecha";
+  }
+
+  if (!input.time) {
+    errors.time = "Se requiere hora";
+  } else if (!/^(0[9]|1[0-6]):[0-5][0-9]$/.test(input.time)) {
+    errors.time = "Horario inválido. Debe ser entre 09:00 y 16:59";
+  }
+
+  // Solo valida si hay ambos campos
+  if (input.date && input.time) {
+    // Crear un objeto Date con la fecha y hora seleccionada
+    const [year, month, day] = input.date.split("-");
+    const [hour, minute] = input.time.split(":");
+
+    const selectedDateTime = new Date(year, month - 1, day, hour, minute); // Date con hora
+    const now = new Date(); // Momento actual
+
+    const diffInMs = selectedDateTime.getTime() - now.getTime();
+    const diffInHours = diffInMs / (1000 * 60 * 60); // Milisegundos → Horas
+
+    if (diffInHours < 24) {
+      errors.date = "El turno debe reservarse con al menos 24 horas de anticipación";
+    } else {
+      const dayOfWeek = selectedDateTime.getDay(); // 0 = domingo, 6 = sábado
+      if (dayOfWeek === 0 || dayOfWeek === 6) {
+        errors.date = "Solo se permiten turnos de lunes a viernes";
+      }
+    }
+  }
+
+  return errors;
+};
