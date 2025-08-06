@@ -5,17 +5,15 @@ import { useContext } from "react";
 import { UserContext } from "../../../context/Context";
 
 const Usuario = () => {
-  const { userId, userName } = useContext(UserContext);
+  const { userName, logoutUser } = useContext(UserContext);
   const navigate = useNavigate();
   const handleLogOut = () => {
-    localStorage.removeItem("userId");
-    localStorage.removeItem("userName");
-    userId(false);
+    logoutUser();
+    navigate("/Login");
     Swal.fire({
       icon: "warning",
       title: "Tu Sesion ha sido cerrada con exito!",
     });
-    navigate("/Login");
   };
   return (
     <div className="usuario">
