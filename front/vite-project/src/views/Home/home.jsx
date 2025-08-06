@@ -41,9 +41,9 @@ const Home = () => {
         <section className="cta">
           <h2>¿Lista para tu momento de paz?</h2>
           <p>Reservá tu turno y regalate bienestar.</p>
-          <a className="cta-button">
+          <button className="cta-button">
             <Link to="/AgendarTurnos">"Agendar Turnos"</Link>
-          </a>
+          </button>
         </section>
       </div>
     </>

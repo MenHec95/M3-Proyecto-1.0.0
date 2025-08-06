@@ -1,13 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import "./Usuario.css";
 import Swal from "sweetalert2";
-const user = "Usuario";
+import { useContext } from "react";
+import { UserContext } from "../../../context/Context";
 
-const Usuario = ({ setIsLogged }) => {
+const Usuario = () => {
+  const { userId, userName } = useContext(UserContext);
   const navigate = useNavigate();
   const handleLogOut = () => {
     localStorage.removeItem("userId");
-    setIsLogged(false);
+    localStorage.removeItem("userName");
+    userId(false);
     Swal.fire({
       icon: "warning",
       title: "Tu Sesion ha sido cerrada con exito!",
@@ -18,7 +21,7 @@ const Usuario = ({ setIsLogged }) => {
     <div className="usuario">
       <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/astral-7998996-6580607.png?f=webp" className="usuarioAvatar" />
       <div className="usuarioInfo">
-        <span className="usuarioName">{user}</span>
+        <span className="usuarioName">{userName}</span>
         <button className="logoutBtn" onClick={handleLogOut}>
           LOGOUT
         </button>
