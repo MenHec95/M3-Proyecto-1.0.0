@@ -1,19 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 // import MyTurns from "../../helpers/myAppointments";
 import Turno from "../../components/Turno/Turno";
-import axios from "axios";
+
 import "./MisTurnos.css";
+import { useContext } from "react";
+import { UserContext } from "../../../context/Context";
 
 export default function MisTurnos() {
-  const [turnos, setTurnos] = useState([]);
-
+  const { turnosUser, turnos } = useContext(UserContext);
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/appointments")
-      .then((data) => {
-        setTurnos(data.data.data);
-      })
-      .catch();
+    turnosUser();
   }, []);
   return (
     <div className="mis-turnos-view">

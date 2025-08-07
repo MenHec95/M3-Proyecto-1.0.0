@@ -1,16 +1,20 @@
 import { createContext, useState } from "react";
 import axios from "axios";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const UserContext = createContext({
   userName: "",
   userId: "",
+  turnos: [],
 
   loginUser: async () => {},
   logoutUser: () => {},
+  turnosUser: async () => {},
 });
 
 export const UserProvider = ({ children }) => {
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
+  const [turnos, setTurnos] = useState([]);
 
   const [userName, setUserName] = useState(localStorage.getItem("userName"));
 
@@ -28,11 +32,17 @@ export const UserProvider = ({ children }) => {
     setUserId(null);
   };
 
+  const turnosUser = async () => {
+    const response = await axios.get(`http://localhost:3000/users/${userId}`);
+    setTurnos(response.data.appointments);
+  };
   const value = {
     userId,
     userName,
+    turnos,
     loginUser,
     logoutUser,
+    turnosUser,
   };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
