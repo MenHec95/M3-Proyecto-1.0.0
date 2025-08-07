@@ -11,6 +11,7 @@ export const UserContext = createContext({
   logoutUser: () => {},
   turnosUser: async () => {},
   createTurnoUser: async () => {},
+  cancelTurno: async () => {},
 });
 
 export const UserProvider = ({ children }) => {
@@ -39,7 +40,13 @@ export const UserProvider = ({ children }) => {
   };
 
   const createTurnoUser = async (values) => {
-    const response = await axios.post("http://localhost:3000/appointments/schedule", { ...values, userId });
+    await axios.post("http://localhost:3000/appointments/schedule", { ...values, userId });
+  };
+
+  const cancelTurno = async (id) => {
+    await axios.put(`http://localhost:3000/appointments/cancel/${id}`);
+    const nuevosTurnos = turnos.map((turnos) => (turnos.id === id ? { ...turnos, status: "cancelled" } : turnos));
+    setTurnos(nuevosTurnos);
   };
   const value = {
     userId,
@@ -49,6 +56,7 @@ export const UserProvider = ({ children }) => {
     logoutUser,
     turnosUser,
     createTurnoUser,
+    cancelTurno,
   };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

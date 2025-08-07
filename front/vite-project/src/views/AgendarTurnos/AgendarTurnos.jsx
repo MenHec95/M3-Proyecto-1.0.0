@@ -26,8 +26,9 @@ export default function AgendarTurnos() {
           confirmButtonColor: "#9A86A4",
         });
       } catch (error) {
+        console.log(error);
         Swal.fire({
-          title: `Error: ${error.response.data.details}`,
+          title: `Error: ${error.response.data.message}`,
           text: "Intentelo de nuevo",
           icon: "error",
           confirmButtonColor: "#e74c3c",
