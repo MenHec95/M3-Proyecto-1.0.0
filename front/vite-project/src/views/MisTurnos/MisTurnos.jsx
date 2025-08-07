@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 // import MyTurns from "../../helpers/myAppointments";
 import Turno from "../../components/Turno/Turno";

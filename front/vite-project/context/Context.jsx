@@ -10,6 +10,7 @@ export const UserContext = createContext({
   loginUser: async () => {},
   logoutUser: () => {},
   turnosUser: async () => {},
+  createTurnoUser: async () => {},
 });
 
 export const UserProvider = ({ children }) => {
@@ -36,6 +37,10 @@ export const UserProvider = ({ children }) => {
     const response = await axios.get(`http://localhost:3000/users/${userId}`);
     setTurnos(response.data.appointments);
   };
+
+  const createTurnoUser = async (values) => {
+    const response = await axios.post("http://localhost:3000/appointments/schedule", { ...values, userId });
+  };
   const value = {
     userId,
     userName,
@@ -43,6 +48,7 @@ export const UserProvider = ({ children }) => {
     loginUser,
     logoutUser,
     turnosUser,
+    createTurnoUser,
   };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
