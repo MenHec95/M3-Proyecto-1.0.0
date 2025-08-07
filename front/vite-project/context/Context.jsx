@@ -45,8 +45,9 @@ export const UserProvider = ({ children }) => {
 
   const cancelTurno = async (id) => {
     await axios.put(`http://localhost:3000/appointments/cancel/${id}`);
-    const nuevosTurnos = turnos.map((turnos) => (turnos.id === id ? { ...turnos, status: "cancelled" } : turnos));
-    setTurnos(nuevosTurnos);
+
+    const prev = turnos.map((t) => (t.id === id ? { ...t, Status: "cancelled" } : t));
+    setTurnos(prev);
   };
   const value = {
     userId,
